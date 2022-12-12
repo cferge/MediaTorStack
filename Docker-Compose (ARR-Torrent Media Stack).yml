@@ -1,0 +1,121 @@
+---
+version: "2.1"
+services:
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: Deployed_lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /path/to/appdata/config:/config
+      - /path/to/music:/music #optional
+      - /path/to/downloads:/downloads #optional
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+    
+  lazylibrarian:
+    image: lscr.io/linuxserver/lazylibrarian:latest
+    container_name: Deployed_lazylibrarian
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - DOCKER_MODS=linuxserver/calibre-web:calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
+    volumes:
+      - /path/to/data:/config
+      - /path/to/downloads/:/downloads
+      - /path/to/data/:/books #optional
+    ports:
+      - 5299:5299
+    restart: unless-stopped
+  
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: Deployed_sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /path/to/data:/config
+      - /path/to/tvseries:/tv #optional
+      - /path/to/downloadclient-downloads:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+  
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: Deployed_radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /path/to/data:/config
+      - /path/to/movies:/movies #optional
+      - /path/to/downloadclient-downloads:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+  
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:develop
+    container_name: Deployed_prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /path/to/data:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: Deployed_overseerr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /path/to/appdata/config:/config
+    ports:
+      - 5055:5055
+    restart: unless-stopped
+    
+  deluge:
+    image: lscr.io/linuxserver/deluge:latest
+    container_name: Deployed_deluge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - DELUGE_LOGLEVEL=error #optional
+    volumes:
+      - /path/to/deluge/config:/config
+      - /path/to/your/downloads:/downloads
+    ports:
+      - 8112:8112
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+    
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: Deployed_plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - PLEX_CLAIM= #optional
+    volumes:
+      - /path/to/library:/config
+      - /path/to/tvseries:/tv
+      - /path/to/movies:/movies
+    restart: unless-stopped
