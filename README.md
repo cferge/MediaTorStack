@@ -8,5 +8,7 @@ Apps Employed
 - Sonarr (Music)
 - Radarr (Movies)
 - Prowlarr (Search Daemon Mgmt)
+- LazyLibrarian (EBook Mgmt)
 - Plex (Media Server)
 - Deluge (Downloader)
+- and More Possibly... 
