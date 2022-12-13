@@ -89,7 +89,7 @@ services:
     restart: unless-stopped
     
   deluge:
-    image: lscr.io/linuxserver/deluge:latest
+    image: linuxserver/deluge:latest
     container_name: Deployed_deluge
     environment:
       - PUID=1000
