@@ -14,3 +14,10 @@ Apps Employed
 - Lidarr (Music)
 - and More Possibly... 
 - Using https://github.com/piscue/docker-backup-scripts to backup the Docker Environment
+
+
+# Installing Chad's Docker "MediaTorStack" Deployment
+
+- Fix/Update your Storage Path's in the .ENV File.
+
+# An Explanation of how I'm setup...
