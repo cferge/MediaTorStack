@@ -20,4 +20,10 @@ Apps Employed
 
 - Fix/Update your Storage Path's in the .ENV File.
 
-## An Explanation of how I'm setup...
+### An Explanation of how I'm setup
+- Machine is an HP z230 SFF Workstation running Proxmox 7.x
+- Virtual Machines are powered by QEMU/KVM (Proxmox)
+- Storage is hosted on OpenMediaVault Virtual Machine
+- 1x Single Virtual Machine hosts the Docker Container's for the MediaTorStack.
+- Storage is connected to OpenMediaVault by backend connection to MediaTorStack VM via NFS.
+- There are 2x main NFS Shares. /Media and /Torrents
