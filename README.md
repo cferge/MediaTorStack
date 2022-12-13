@@ -11,4 +11,6 @@ Apps Employed
 - LazyLibrarian (EBook Mgmt)
 - Plex (Media Server)
 - Deluge (Downloader)
+- Lidarr (TV Show Mgmt)
 - and More Possibly... 
+- Using https://github.com/piscue/docker-backup-scripts to backup the Docker Environment

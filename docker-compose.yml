@@ -11,46 +11,26 @@ services:
       - PGID=1000
       - TZ=America/New_York
     volumes:
-      - /path/to/appdata/config:/config
-      - /path/to/music:/music #optional
-      - /path/to/downloads:/downloads #optional
+      - ${LIDARR_HOST_CONFIG_PATH}:/config
+      - ${LIDARR_HOST_MUSIC_MEDIA_PATH}:/music #optional
+      - ${LIDARR_HOST_DOWNLOADS_PATH}:/downloads #optional
     ports:
       - 8686:8686
-    restart: unless-stopped
-    
-  lazylibrarian:
-    image: lscr.io/linuxserver/lazylibrarian:latest
-    env_file:
-      - .env     # path to your .env file
-
-    container_name: Deployed_lazylibrarian
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/New_York
-      - DOCKER_MODS=linuxserver/calibre-web:calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
-    volumes:
-      - /path/to/data:/config
-      - /path/to/downloads/:/downloads
-      - /path/to/data/:/books #optional
-    ports:
-      - 5299:5299
     restart: unless-stopped
   
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     env_file:
       - .env     # path to your .env file
-
     container_name: Deployed_sonarr
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
     volumes:
-      - /path/to/data:/config
-      - /path/to/tvseries:/tv #optional
-      - /path/to/downloadclient-downloads:/downloads #optional
+      - ${SONARR_HOST_CONFIG_PATH}:/config
+      - ${SONARR_HOST_TV_MEDIA_PATH}:/tv #optional
+      - ${SONARR_HOST_DOWNLOADS_PATH}:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -59,20 +39,37 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     env_file:
       - .env     # path to your .env file
-
     container_name: Deployed_radarr
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
     volumes:
-      - /path/to/data:/config
-      - /path/to/movies:/movies #optional
-      - /path/to/downloadclient-downloads:/downloads #optional
+      - ${RADARR_HOST_CONFIG_PATH}:/config
+      - ${RADARR_HOST_TV_MEDIA_PATH}:/movies #optional
+      - ${RADARR_HOST_DOWNLOADS_PATH}:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
-  
+
+  lazylibrarian:
+    image: lscr.io/linuxserver/lazylibrarian:latest
+    env_file:
+      - .env     # path to your .env file
+    container_name: Deployed_lazylibrarian
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - DOCKER_MODS=linuxserver/calibre-web:calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
+    volumes:
+      - ${LAZYLIBRARIAN_HOST_CONFIG_PATH}:/config
+      - ${LAZYLIBRARIAN_HOST_DOWNLOADS_PATH}:/downloads
+      - ${LAZYLIBRARIAN_HOST_BOOKS_PATH}:/books #optional
+    ports:
+      - 5299:5299
+    restart: unless-stopped
+
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
     env_file:
@@ -84,7 +81,7 @@ services:
       - PGID=1000
       - TZ=America/New_York
     volumes:
-      - /path/to/data:/config
+      - ${PROWLARR_HOST_CONFIG_PATH}:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -99,7 +96,7 @@ services:
       - PGID=1000
       - TZ=America/New_York
     volumes:
-      - /path/to/appdata/config:/config
+      - ${OVERSEERR_HOST_CONFIG_PATH}:/config
     ports:
       - 5055:5055
     restart: unless-stopped
@@ -115,27 +112,12 @@ services:
       - TZ=America/New_York
       - DELUGE_LOGLEVEL=error #optional
     volumes:
-      - /path/to/deluge/config:/config
-      - /path/to/your/downloads:/downloads
+      - ${DELUGE_HOST_CONFIG_PATH}:/config
+      - ${DELUGE_HOST_DOWNLOADS_PATH}:/downloads
+      - ${DELUGE_HOST_COMPLETED_PATH}:/completed
+
     ports:
       - 8112:8112
       - 6881:6881
       - 6881:6881/udp
-    restart: unless-stopped
-    
-  plex:
-    image: lscr.io/linuxserver/plex:latest
-    env_file:
-      - .env     # path to your .env file
-    container_name: Deployed_plex
-    network_mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - VERSION=docker
-      - PLEX_CLAIM= #optional
-    volumes:
-      - /path/to/library:/config
-      - /path/to/tvseries:/tv
-      - /path/to/movies:/movies
     restart: unless-stopped
