@@ -5,12 +5,12 @@ My Media Stack used with Docker Compose
 
 
 Apps Employed
-- Sonarr (Music)
+- Sonarr (TV Shows)
 - Radarr (Movies)
 - Prowlarr (Search Daemon Mgmt)
 - LazyLibrarian (EBook Mgmt)
 - Plex (Media Server)
 - Deluge (Downloader)
-- Lidarr (TV Show Mgmt)
+- Lidarr (Music)
 - and More Possibly... 
 - Using https://github.com/piscue/docker-backup-scripts to backup the Docker Environment
