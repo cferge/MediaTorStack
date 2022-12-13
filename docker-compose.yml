@@ -100,8 +100,10 @@ services:
       - ${DELUGE_HOST_CONFIG_PATH}:/config
       - ${DELUGE_HOST_DOWNLOADS_PATH}:/downloads
       - ${DELUGE_HOST_COMPLETED_PATH}:/completed
+      - ${DELUGE_HOST_TORRENTFILES_PATH}:/TorrentFiles
     ports:
       - 8112:8112
       - 6881:6881
       - 6881:6881/udp
+      - 58846:58846
     restart: unless-stopped
