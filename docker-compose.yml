@@ -2,11 +2,9 @@
 version: "2.1"
 services:
   lidarr:
-    image: lscr.io/linuxserver/lidarr:latest
+    image: linuxserver/lidarr:latest
     container_name: Deployed_lidarr
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=America/New_York
     volumes:
       - ${LIDARR_HOST_CONFIG_PATH}:/config
@@ -17,11 +15,9 @@ services:
     restart: unless-stopped
   
   sonarr:
-    image: lscr.io/linuxserver/sonarr:latest
+    image: linuxserver/sonarr:latest
     container_name: Deployed_sonarr
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=America/New_York
     volumes:
       - ${SONARR_HOST_CONFIG_PATH}:/config
@@ -32,11 +28,9 @@ services:
     restart: unless-stopped
   
   radarr:
-    image: lscr.io/linuxserver/radarr:latest
+    image: linuxserver/radarr:latest
     container_name: Deployed_radarr
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=America/New_York
     volumes:
       - ${RADARR_HOST_CONFIG_PATH}:/config
@@ -47,11 +41,9 @@ services:
     restart: unless-stopped
 
   lazylibrarian:
-    image: lscr.io/linuxserver/lazylibrarian:latest
+    image: linuxserver/lazylibrarian:latest
     container_name: Deployed_lazylibrarian
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=America/New_York
       - DOCKER_MODS=linuxserver/calibre-web:calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
     volumes:
@@ -63,11 +55,9 @@ services:
     restart: unless-stopped
 
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:develop
+    image: linuxserver/prowlarr:develop
     container_name: Deployed_prowlarr
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=America/New_York
     volumes:
       - ${PROWLARR_HOST_CONFIG_PATH}:/config
@@ -76,11 +66,9 @@ services:
     restart: unless-stopped
 
   overseerr:
-    image: lscr.io/linuxserver/overseerr:latest
+    image: linuxserver/overseerr:latest
     container_name: Deployed_overseerr
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=America/New_York
     volumes:
       - ${OVERSEERR_HOST_CONFIG_PATH}:/config
@@ -92,8 +80,6 @@ services:
     image: linuxserver/deluge:latest
     container_name: Deployed_deluge
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=America/New_York
       - DELUGE_LOGLEVEL=error #optional
     volumes:
