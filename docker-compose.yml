@@ -93,6 +93,7 @@ services:
       - 6881:6881/udp
       - 58846:58846
     restart: unless-stopped
+    
   plex:
     image: linuxserver/plex:latest
     container_name: plex

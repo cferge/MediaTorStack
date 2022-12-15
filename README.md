@@ -18,7 +18,7 @@ Apps Employed
 
 # Installing Chad's Docker "MediaTorStack" Deployment
 
-- Fix/Update your Storage Path's in the .ENV File.
+- Fix/Update your Variables/Storage Path's in the .ENV File.
 
 ### An Explanation of how I'm setup
 - Machine is an HP z230 SFF Workstation running Proxmox 7.x
