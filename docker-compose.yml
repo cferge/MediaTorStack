@@ -93,3 +93,14 @@ services:
       - 6881:6881/udp
       - 58846:58846
     restart: unless-stopped
+  plex:
+    image: linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM_NUMBER} #optional
+    volumes:
+      - ${PLEX_HOST_CONFIG_PATH}:/config
+      - ${PLEX_HOST_MEDIA_PATH}:/media
+    restart: unless-stopped
