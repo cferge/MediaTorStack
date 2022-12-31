@@ -2,10 +2,13 @@
 version: "2.1"
 services:
   lidarr:
-    image: linuxserver/lidarr:latest
+    image: lscr.io/linuxserver/lidarr:latest
     container_name: Deployed_lidarr
     environment:
       - TZ=America/New_York
+      - PUID=1000
+      - PGID=1000
+      - LIDARR__API=${STACK_API_KEY}
     volumes:
       - ${LIDARR_HOST_CONFIG_PATH}:/config
       - ${LIDARR_HOST_MUSIC_MEDIA_PATH}:/music #optional
@@ -15,10 +18,13 @@ services:
     restart: unless-stopped
   
   sonarr:
-    image: linuxserver/sonarr:latest
+    image: lscr.io/linuxserver/sonarr:latest
     container_name: Deployed_sonarr
     environment:
+      - PUID=1000
+      - PGID=1000
       - TZ=America/New_York
+      - SONARR__API=${STACK_API_KEY}
     volumes:
       - ${SONARR_HOST_CONFIG_PATH}:/config
       - ${SONARR_HOST_TV_MEDIA_PATH}:/tv #optional
@@ -28,10 +34,13 @@ services:
     restart: unless-stopped
   
   radarr:
-    image: linuxserver/radarr:latest
+    image: lscr.io/linuxserver/radarr:latest
     container_name: Deployed_radarr
     environment:
+      - PUID=1000
+      - PGID=1000
       - TZ=America/New_York
+      - RADARR__API=${STACK_API_KEY}
     volumes:
       - ${RADARR_HOST_CONFIG_PATH}:/config
       - ${RADARR_HOST_MOVIE_MEDIA_PATH}:/movies #optional
@@ -41,11 +50,14 @@ services:
     restart: unless-stopped
 
   lazylibrarian:
-    image: linuxserver/lazylibrarian:latest
+    image: lscr.io/linuxserver/lazylibrarian:latest
     container_name: Deployed_lazylibrarian
     environment:
+      - PUID=1000
+      - PGID=1000
       - TZ=America/New_York
-      - DOCKER_MODS=linuxserver/calibre-web:calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
+      - LAZYLIBRARIAN__API=${STACK_API_KEY}
+      - DOCKER_MODS=ghcr.io/linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
     volumes:
       - ${LAZYLIBRARIAN_HOST_CONFIG_PATH}:/config
       - ${LAZYLIBRARIAN_HOST_DOWNLOADS_PATH}:/downloads
@@ -55,10 +67,13 @@ services:
     restart: unless-stopped
 
   prowlarr:
-    image: linuxserver/prowlarr:develop
+    image: lscr.io/linuxserver/prowlarr:develop
     container_name: Deployed_prowlarr
     environment:
+      - PUID=1000
+      - PGID=1000
       - TZ=America/New_York
+      - PROWLARR__API=${STACK_API_KEY}
     volumes:
       - ${PROWLARR_HOST_CONFIG_PATH}:/config
     ports:
@@ -66,10 +81,13 @@ services:
     restart: unless-stopped
 
   overseerr:
-    image: linuxserver/overseerr:latest
+    image: lscr.io/linuxserver/overseerr:latest
     container_name: Deployed_overseerr
     environment:
+      - PUID=1000
+      - PGID=1000
       - TZ=America/New_York
+      - OVERSEERR__API=${STACK_API_KEY}
     volumes:
       - ${OVERSEERR_HOST_CONFIG_PATH}:/config
     ports:
@@ -77,9 +95,11 @@ services:
     restart: unless-stopped
     
   deluge:
-    image: linuxserver/deluge:latest
+    image: lscr.io/linuxserver/deluge:latest
     container_name: Deployed_deluge
     environment:
+      - PUID=1000
+      - PGID=1000
       - TZ=America/New_York
       - DELUGE_LOGLEVEL=error #optional
     volumes:
@@ -95,11 +115,13 @@ services:
     restart: unless-stopped
     
   plex:
-    image: linuxserver/plex:latest
-    container_name: plex
+    image: lscr.io/linuxserver/plex:latest
+    container_name: Deployed_plex
     network_mode: host
     environment:
       - VERSION=docker
+      - PUID=1000
+      - PGID=1000
       - PLEX_CLAIM=${PLEX_CLAIM_NUMBER} #optional
     volumes:
       - ${PLEX_HOST_CONFIG_PATH}:/config
